@@ -9,7 +9,7 @@ function populateFriendList() {
 }
 
 function addFriendToList(friend) {
-	$('#friendList').append('<li>' + friend + '<button>Unfriend</button> </li>');
+	$('#friendList').append('<li><span>' + friend + '</span><button>Unfriend</button> </li>');
 }
 
 function addFriend(){
@@ -22,7 +22,11 @@ function addFriend(){
 };
 
 function unFriend(){
-	$(this).parent().remove();
+	li = $(this).parent()
+	friend = $(li.find('span')[0]).text();
+	index = friends.indexOf(friend);
+	friends.splice(index, 1);
+	li.remove();
 };
 
 
