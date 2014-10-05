@@ -16,11 +16,11 @@ function createFriendList() {
 	$('body').append('<ul id="friendList"></ul>');
 
 	// Call a function that populates the friendList with friendListItem(s)
-	populateFriendList();
+	updateFriendList();
 };
 
 // ----------- This function creates the HTML for friend list items
-function populateFriendList() {
+function updateFriendList() {
 	// Remove the existing friend list items
 	$('#friendList').empty();
 		
@@ -30,12 +30,14 @@ function populateFriendList() {
 		// Use JQuery to select an HTML element with the id of "friendList"
 		// Append your friendList with a string that includes the opening and closing tags for an HTML list item
 		// Each time you iterate over the array, pass the friend at index i into the friendListItem string  
-		$('#friendList').append('<li>' + friends[i] + '</li>');
+		$('#friendList').append('<li>' + friends[i] + '<button class="unFriend" id='+ i +'>Unfriend</button></li>');
 	};
+	$('.unFriend').on('click', unFriend);
+
 }
 
 // This function updates the friend list with the latest and greatest friend list items
-function updateFriendList(){
+function addFriend(){
 
 	// Create a variable to represent the value of the friend input field
 	var newFriend = $('#friend_input').val();
@@ -46,17 +48,21 @@ function updateFriendList(){
 		friends.push(newFriend);
 
 		// Populate the friend list
-		populateFriendList();
+		updateFriendList();
 
 		//clear the input field
 		$('#friend_input').val('');
 	};
 };
 
+function unFriend(){
+	var currentId = $(this).attr('id');
+	
+	$(this).parent().remove();
+};
+
 $(document).ready(function(){});
 
 createFriendList();
-
-$('#friend_input_button').on('click', updateFriendList);
-
+$('#friend_input_button').on('click', addFriend);
 
