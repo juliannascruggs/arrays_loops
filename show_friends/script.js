@@ -32,11 +32,11 @@ function updateFriendList() {
 		// Each time you iterate over the array, pass the friend at index i into the friendListItem string  
 		$('#friendList').append('<li>' + friends[i] + '<button class="unFriend" id='+ i +'>Unfriend</button></li>');
 	};
+	// I don't quite understand why, but I have to keep this here, otherwise it goes away when I empty the #friendList element
 	$('.unFriend').on('click', unFriend);
-
 }
 
-// This function updates the friend list with the latest and greatest friend list items
+// ----------- This function updates the friend list with the latest and greatest friend list items
 function addFriend(){
 
 	// Create a variable to represent the value of the friend input field
@@ -55,14 +55,21 @@ function addFriend(){
 	};
 };
 
+// ----------- This function unfriends bitches who be trifflin' 
+// ----------- Gone forever, with no chance for remorse
 function unFriend(){
 	var currentId = $(this).attr('id');
-	
+	friends.splice(currentId, 1);
 	$(this).parent().remove();
+	updateFriendList();
 };
 
-$(document).ready(function(){});
+// ----------- And now...let show begin!
+$(document).ready(function(){
 
-createFriendList();
-$('#friend_input_button').on('click', addFriend);
+	createFriendList();
+
+	$('#friend_input_button').on('click', addFriend);
+
+});
 
