@@ -1,4 +1,4 @@
-
+// change
 var friends = ['Alex', 'Elyse', 'Mae', 'Sartaj'];
 
 function populateFriendList() {
