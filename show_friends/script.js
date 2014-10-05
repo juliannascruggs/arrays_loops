@@ -43,7 +43,8 @@ function addFriend(){
 	var newFriend = $('#friend_input').val();
 
 	// Check if the friend input field is empty
-	if (newFriend != ''){
+	// An empty string is the same as 'false' in Javascript
+	if (newFriend != false){
 		// Update friends to include the new friend
 		friends.push(newFriend);
 
