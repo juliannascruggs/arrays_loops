@@ -1,13 +1,17 @@
 // Create an array of friends
 var friends = ['Alex', 'Elyse', 'Mae', 'Sartaj'];
 
-// Create a friendList variable 
+// Create a friendList variable and make it equal to a string
+// The string includes the opening and closing tags for an HTML list with an id
 var friendList = '<ul id="friendList"></ul>'
 
-// Create a friendListItem variable
+// Create a variable to represent your friend list items
 var friendListItem;
 
-// This is a function that creates the HTML for a friend list item
+// Create a variable to represent the value of the friend input field
+var friendInputValue; 
+
+// This is a function that creates the HTML for friend list items
 function populateFriendList() {
 
 	// Iterate over the friends array
@@ -17,29 +21,22 @@ function populateFriendList() {
 		// Each time you iterate over the array, pass the friend at index i into the friendListItem string  
 		friendListItem = '<li>' + friends[i] + '</li>';
 
-		//
-		modifyFriendList();
+		// Add your friend list item to the DOM
+		addFriendListItem();
 	};
 }
 
-// This is a function that appends the friend list HTML with a friend list item
-function modifyFriendList(){
-	// Add the friendListItem variable to the end of your friendList variable
+// This is a function that appends an HTML with the id of "friendList" with a friend list item
+function addFriendListItem(){
+
+	// Use JQuery to select an HTML element with the id of "friendList"
+	// Append that element with the friendListItem variable
 	$('#friendList').append(friendListItem);
-	// friendList += friendListItem;
+
 };
 
-// This is a function that creates an HTML list and adds that list to your HTML page
+// This is a function that appends the HTML body with a friend list
 function createFriendList() {
-
-	// // Set your friendList variable to be equal to a string is the opening tag of an unordered HTML list element
-	// friendList = '<ul id="friendList">';
-
-	// // Call a function that
-	// populateFriendList();
-
-	// // Add an unordered list closing tag to the end of your friendList string
-	// friendList += '</ul>';
 
 	// Use JQuery to select the body element in the DOM
 	// Use the append method to append the body of your HTML with your friendList string
@@ -49,20 +46,36 @@ function createFriendList() {
 	populateFriendList();
 };
 
+
 $(document).ready(function(){});
 
 createFriendList();
 console.log(friendList);
 
-//
 $('#friend_input_button').on('click', updateFriendList);
 
+// var empty = 'George';
+// var friendInputValue;
+
+// function setFriendInputValue(){
+// 	friendInputValue = $('#friend_input').val();
+// 	return friendInputValue;
+// 	console.log('friendInputValue');
+// };
+// console.log(setFriendInputValue);
+
 function updateFriendList(){
-	addFriend();
-	createFriendList();
+	friendInputValue = $('#friend_input').val();
+	console.log(friendInputValue);
+	if (friendInputValue != ''){
+
+	// if ($('#friend_input:input').val() != ''){
+		friends.push($('#friend_input').val());
+		$('#friendList').empty();
+		populateFriendList();
+	}
 }
 
-var friendInputValue = $('#friend_input').val()
 
 function addFriend(){
 	friends.push($('#friend_input').val());
